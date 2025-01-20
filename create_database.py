@@ -1,8 +1,6 @@
-import customtkinter as tk
-# 匯入 customtkinter 作為 tk，用於建立具有自訂樣式的 GUI 視窗
+import customtkinter as tk # 匯入 customtkinter 作為 tk，用於建立具有自訂樣式的 GUI 視窗
 import pyodbc  # 匯入 pyodbc 模組，用於與 SQL Server 資料庫進行連線
-from db_connection import get_connection, set_current_database
-# 匯入自定義的資料庫連線函式和設定當前資料庫的函式
+from db_connection import get_connection, set_current_database # 匯入自定義的資料庫連線函式和設定當前資料庫的函式
 
 def create_database_window():
     """

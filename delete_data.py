@@ -21,6 +21,7 @@ def delete_data_window():
                 connection.autocommit = True
                 # 執行刪除 SQL 語句
                 connection.execute(f"DELETE FROM {entry_table_name.get()} WHERE id = {entry_id.get()}")
+                # print(f"DELETE FROM {entry_table_name.get()} WHERE id = {entry_id.get()}")
                 # 刪除成功後更新提示信息
                 info_label.configure(text="刪除成功")
             else:

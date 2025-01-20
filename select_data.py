@@ -24,6 +24,7 @@ def select_data_window():
                 cursor = connection.cursor()  # 建立游標
                 # 執行查詢語句，根據表名和 ID 查詢
                 cursor.execute(f"SELECT * FROM {entry_table_name.get()} WHERE id = {entry_id.get()}")
+                # print(f"SELECT * FROM {entry_table_name.get()} WHERE id = {entry_id.get()}")
                 result = ""
                 # 遍歷查詢結果，將記錄格式化為字串
                 for data in cursor:

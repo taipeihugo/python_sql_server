@@ -10,6 +10,7 @@ def insert_data_window():
     def insert():
         """
         處理資料插入的邏輯，包括檢查使用者輸入和執行 SQL 語句。
+        防止重複插入相同的資料。
         """
         try:
             # 獲取當前選擇的資料庫
@@ -21,8 +22,19 @@ def insert_data_window():
             # 嘗試連接到當前資料庫
             connection = get_connection(current_db)
             if connection:
+                cursor = connection.cursor()  # 建立游標
+                # 檢查是否已存在相同的資料
+                cursor.execute(
+                    f"SELECT COUNT(*) FROM {entry_table_name.get()} WHERE id = {entry_id.get()}"
+                )
+                # print(f"SELECT COUNT(*) FROM {entry_table_name.get()} WHERE id = {entry_id.get()}")
+                # fetchone()讀取1行
+                if cursor.fetchone()[0] > 0:
+                    info_label.configure(text="資料已存在，請勿重複新增")  # 資料已存在提示
+                    return
+
+                # 若資料不存在，執行插入資料的 SQL 語句
                 connection.autocommit = True  # 開啟自動提交模式
-                # 執行插入資料的 SQL 語句
                 connection.execute(
                     f"INSERT INTO {entry_table_name.get()} "
                     f"VALUES ({entry_id.get()}, '{entry_first_name.get()}', '{entry_last_name.get()}')"

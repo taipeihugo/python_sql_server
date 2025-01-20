@@ -22,13 +22,11 @@ def delete_database_window():
                 # 將資料庫設為單一用戶模式以便刪除
                 # SINGLE_USER 模式確保只有一個用戶連接，並且中斷其他連接
                 # WITH ROLLBACK IMMEDIATE 確保未完成的交易會回滾
-                connection.execute(f"""
-                    ALTER DATABASE [{db_name}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                """)
-
+                connection.execute(f"""ALTER DATABASE {db_name} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;""")
+                # print(f"""ALTER DATABASE {db_name} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;""")
                 # 刪除指定名稱的資料庫
                 connection.execute(f"DROP DATABASE {db_name}")
-
+                # print(f"DROP DATABASE {db_name}")
                 # 如果刪除的資料庫是當前選擇的資料庫，則重置當前資料庫為 None
                 if get_current_database() == db_name:
                     set_current_database(None)
